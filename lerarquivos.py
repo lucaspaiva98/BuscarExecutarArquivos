@@ -2,23 +2,19 @@ from buscadorArquivo import buscadorDeArquivo
 import pandas as pd
 import os
 
-def abrirArquivo(file_path):
+class DadosFuncionario:
+    def __init__(self):
+        self.nome = []
+        self.setor = []
+        self.funcao = []
+        self.celular = []
+        self.telefone = []
+        self.ramal = []
+        self.email = []
 
-    with open(file_path, "r") as file:
-        data = file.readlines()
-
-    data = [line.strip() for line in data]
-
-    # mostrar a lista linha por linha
-    for line in data:
-        print(line)
-    return data
-
-def __init__(self):
-    def executarleitura():
+    def executarleitura(self):
         # Abrir o arquivo
-        # file_path = buscadorDeArquivo()
-        file_path = os.path.join(os.getcwd(), 'Dados p. preencher.xlsx')
+        file_path = buscadorDeArquivo()
         data = pd.read_excel(file_path, dtype=str)  # tudo como texto
 
         # Dados do usuário
@@ -30,5 +26,17 @@ def __init__(self):
         self.ramal = data['Ramal'].tolist()
         self.email = data['Email'].tolist()
 
+    def exibir_dados(self):
+        # Imprimir dados do usuário
+        print("Nome:", ', '.join(self.nome))
+        print("Setor:", ', '.join(self.setor))
+        print("Função:", ', '.join(self.funcao))
+        print("Celular:", ', '.join(self.celular))
+        print("Telefone:", ', '.join(self.telefone))
+        print("Ramal:", ', '.join(self.ramal))
+        print("E-mail:", ', '.join(self.email))
+
 if __name__ == "__main__":
-    nome, setor, funcao, celular, telefone, ramal, email = executarleitura()
+    df = DadosFuncionario()
+    df.executarleitura()
+    df.exibir_dados()
